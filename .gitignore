@@ -1,0 +1,12 @@
+# C# ignores
+bin/
+obj/
+packages/
+
+# C
+
+# Python
+
+# Datasets
+mongo-data/
+datasource-climate/
