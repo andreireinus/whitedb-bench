@@ -1,6 +1,7 @@
 namespace Benchmark.Cases
 {
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
 
     using Benchmark.Cases.Models;
@@ -9,6 +10,7 @@ namespace Benchmark.Cases
     {
         public IEnumerable<City> GetCities()
         {
+            int count = 0;
             using (var reader = new StreamReader("worldcitiespop.txt"))
             {
                 var isFirstLineRead = false;
@@ -25,6 +27,11 @@ namespace Benchmark.Cases
                         isFirstLineRead = true;
                         continue;
                     }
+
+                    //if (count++ > 100)
+                    //{
+                    //    yield break;
+                    //}
 
                     var parts = line.Split(',');
                     yield return
@@ -48,12 +55,7 @@ namespace Benchmark.Cases
                 return -1;
             }
 
-            double value;
-            if (double.TryParse(s, out value))
-            {
-                return value;
-            }
-            return -1;
+            return double.Parse(s, CultureInfo.InvariantCulture);
         }
 
         private static int ParsePopulation(string s)
@@ -63,12 +65,7 @@ namespace Benchmark.Cases
                 return -1;
             }
 
-            int value;
-            if (int.TryParse(s, out value))
-            {
-                return value;
-            }
-            return -1;
+            return int.Parse(s);
         }
     }
 }

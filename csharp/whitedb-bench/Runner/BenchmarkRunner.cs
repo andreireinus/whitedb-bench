@@ -10,7 +10,7 @@ namespace Benchmark.Runner
     internal class BenchmarkRunner<T> where T : BenchmarkCase, new()
     {
 #if DEBUG
-        private const int Count = 10;
+        private const int Count = 1;
 #else
         private const int Count = 10;
 #endif

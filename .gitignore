@@ -10,3 +10,4 @@ packages/
 # Datasets
 mongo-data/
 datasource-climate/
+*.pdf
