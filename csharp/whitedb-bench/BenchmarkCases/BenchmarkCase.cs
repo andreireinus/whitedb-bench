@@ -1,8 +1,6 @@
 ﻿namespace Benchmark.Cases
 {
-    using System;
-
-    public abstract class BenchmarkCase : IDisposable
+    public abstract class BenchmarkCase
     {
         public abstract bool Run();
 
@@ -14,6 +12,12 @@
         {
         }
 
-        public abstract void Dispose();
+        public virtual void BeforeRun()
+        {
+        }
+
+        public virtual void AfterRun()
+        {
+        }
     }
 }

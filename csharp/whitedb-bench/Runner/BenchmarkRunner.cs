@@ -3,31 +3,48 @@ namespace Benchmark.Runner
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
 
     using Benchmark.Cases;
 
-    internal class BenchmarkRunner<T> where T : BenchmarkCase, new()
+    using WhiteDb.Data;
+
+    internal class BenchmarkRunner
     {
+        private readonly BenchmarkCase benchmark;
+
 #if DEBUG
         private const int Count = 1;
 #else
-        private const int Count = 10;
+        private const int Count = 20;
 #endif
 
-        private readonly T benchmark = new T();
+        protected BenchmarkRunner(BenchmarkCase benchmark)
+        {
+            this.benchmark = benchmark;
+        }
 
         internal List<long> Run()
         {
+            Console.WriteLine("Enviroment: {0}", OsHelper.IsMono ? "Mono" : "Win32");
+            Console.WriteLine("Setup started");
             this.benchmark.Setup();
+            Console.WriteLine("Setup complete");
 
             var times = new List<long>();
             for (var i = 0; i < Count; i++)
             {
+                this.benchmark.BeforeRun();
                 var sw = Stopwatch.StartNew();
+                Console.WriteLine("Run started, {0}", i);
+
                 var result = this.benchmark.Run();
+
+                Console.WriteLine("Run complete, {0}, {1}", i, result);
+
                 sw.Stop();
-                times.Add(sw.ElapsedMilliseconds);
+                times.Add((long)(sw.Elapsed.TotalMilliseconds * 10));
+
+                this.benchmark.AfterRun();
 
                 if (result)
                 {
@@ -38,11 +55,19 @@ namespace Benchmark.Runner
                 break;
             }
 
-            times.Average();
-
+            //Console.WriteLine("TearDown started");
             this.benchmark.TearDown();
+            //Console.WriteLine("TearDown complete");
 
             return times;
+        }
+    }
+
+    internal class BenchmarkRunner<T> : BenchmarkRunner where T : BenchmarkCase, new()
+    {
+        internal BenchmarkRunner()
+            : base(new T())
+        {
         }
     }
 }

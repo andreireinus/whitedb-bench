@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,31 +46,33 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MongoDB.Driver.Core.2.0.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
-    <Reference Include="STSdb4">
-      <HintPath>..\packages\STSdb.4.0.0\lib\STSdb4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WhiteDb.Data">
+    <Reference Include="WhiteDb.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\WhiteDb.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenchmarkCase.cs" />
-    <Compile Include="STSdb\InsertCitiesSTSdb.cs" />
-    <Compile Include="MongoDb\CitiesQueryMongoDb.cs" />
-    <Compile Include="WhiteDb\CitiesQueryWhiteDb.cs" />
+    <Compile Include="MongoDb\InsertCitiesMongoDb.cs" />
+    <Compile Include="MongoDb\UpdateCitiesMongoDb.cs" />
+    <Compile Include="MongoDb\SelectCitiesMongoDb.cs" />
+    <Compile Include="WhiteDb\ApiInsertBase.cs" />
+    <Compile Include="WhiteDb\ApiInsertCaseGigabyte.cs" />
+    <Compile Include="WhiteDb\ApiInsertCaseSmall.cs" />
+    <Compile Include="WhiteDb\ApiQueryBase.cs" />
+    <Compile Include="WhiteDb\ApiQueryCaseIndex.cs" />
+    <Compile Include="WhiteDb\ApiQueryCaseSequential.cs" />
+    <Compile Include="WhiteDb\ApiQueryCaseWgQuery.cs" />
+    <Compile Include="WhiteDb\ApiUpdateCase.cs" />
+    <Compile Include="WhiteDb\InsertCitiesWhiteDb.cs" />
+    <Compile Include="WhiteDb\QueryCitiesWhiteDb.cs" />
     <Compile Include="CititesReader.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WhiteDb\UpdateCitiesWhiteDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\lib\wgdb.dll">
@@ -85,8 +87,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="STSdb4.DevelopersGuide.pdf" />
-    <None Include="STSdb4.GettingStarted.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

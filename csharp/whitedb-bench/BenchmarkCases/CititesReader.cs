@@ -10,6 +10,11 @@ namespace Benchmark.Cases
     {
         public IEnumerable<City> GetCities()
         {
+            return this.GetCities<City>();
+        }
+
+        public IEnumerable<T> GetCities<T>() where T : City, new()
+        {
             int count = 0;
             using (var reader = new StreamReader("worldcitiespop.txt"))
             {
@@ -22,20 +27,19 @@ namespace Benchmark.Cases
                         continue;
                     }
 
+                    if (count++ == 10000)
+                    {
+                        //yield break;
+                    }
                     if (!isFirstLineRead)
                     {
                         isFirstLineRead = true;
                         continue;
                     }
 
-                    //if (count++ > 100)
-                    //{
-                    //    yield break;
-                    //}
-
                     var parts = line.Split(',');
                     yield return
-                        new City
+                        new T
                         {
                             Country = parts[0],
                             Name = parts[2],

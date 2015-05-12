@@ -41,11 +41,10 @@ int run_test(void *db, int nr) {
 
 int main(int argc, char **argv) {
     void *db;
-    struct timespec start, stop;
+	struct timespec start, stop;
     int i;
 
-    db = build_city_database();
-    wg_create_index(db, 0, WG_INDEX_TYPE_TTREE, NULL, 0);
+	db = build_city_database();
 
     for (i = 0; i < run_count(); i++) {
         clock_gettime(CLOCK_REALTIME, &start);
@@ -53,9 +52,9 @@ int main(int argc, char **argv) {
         clock_gettime(CLOCK_REALTIME, &stop);
         diff(start, stop);
     }
-
     wg_detach_database(db);
     wg_delete_database("1");
 
     return (EXIT_SUCCESS);
 }
+

@@ -11,3 +11,9 @@ packages/
 mongo-data/
 datasource-climate/
 *.pdf
+
+# utils
+node_modules
+python/build_database
+results/
+*.bin
